@@ -1,0 +1,4 @@
+delegates
+=========
+
+small delegate implementation
