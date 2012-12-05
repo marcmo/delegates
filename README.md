@@ -21,7 +21,7 @@ simple usage example:
     };
     ...
     A a;
-    auto d = BIND(&A::foo, &a);
+    auto d = DELEGATE(&A::foo, &a);
     d(42);
 
 inspired from the [The Impossibly Fast C++ Delegates](http://www.codeproject.com/Articles/11015/The-Impossibly-Fast-C-Delegates) and [Lightweight Generic C++ Callbacks (or, Yet Another Delegate Implementation)](http://www.codeproject.com/Articles/136799/Lightweight-Generic-C-Callbacks-or-Yet-Another-Del)
