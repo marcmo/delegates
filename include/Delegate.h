@@ -1,39 +1,37 @@
-
+/**
+ * Main template for delgates
+ *
+ * \tparam return_type  return type of the function that gets captured
+ * \tparam params       variadic template list for possible arguments
+ *                      of the captured function
+ */
 template<typename return_type, typename... params>
 class Delegate
 {
-    typedef return_type (*Type)(void* callee, params... );
+    typedef return_type (*Pointer2Function)(void* callee, params...);
 public:
-    Delegate(void* callee, Type function)
+    Delegate(void* callee, Pointer2Function function)
         : fpCallee(callee)
         , fpCallbackFunction(function)
     {}
 
-    template <class T, return_type (T::*TMethod)(params... )>
-    static Delegate from_function(T* callee)
-    {
-        Delegate d(callee, &methodCaller<T, TMethod>);
-        return d;
-    }
-
     return_type operator()(params... xs) const
     {
-        return (*fpCallbackFunction)(fpCallee, xs... );
+        return (*fpCallbackFunction)(fpCallee, xs...);
+    }
+
+    bool operator==(const Delegate& other) const
+    {
+        return (fpCallee == other.fpCallee)
+               && (fpCallbackFunction == other.fpCallbackFunction);
     }
 
 private:
 
     void* fpCallee;
-    Type fpCallbackFunction;
-
-    template <class T, return_type (T::*TMethod)(params... )>
-    static return_type methodCaller(void* callee, params... xs)
-    {
-        T* p = static_cast<T*>(callee);
-        return (p->*TMethod)(xs... );
-    }
+    Pointer2Function fpCallbackFunction;
 };
-#define BIND(func, thisPrt) (Helper(func).Bind<func>(thisPrt))
+
 template<typename T, typename return_type, typename... params>
 struct HelperTag
 {
@@ -54,5 +52,7 @@ HelperTag<T, return_type, params... > Helper(return_type (T::*)(params...))
 {
     return HelperTag<T, return_type, params...>();
 }
+
+#define DELEGATE(func, thisPrt) (Helper(func).Bind<func>(thisPrt))
 
 

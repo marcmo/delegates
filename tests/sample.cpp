@@ -20,9 +20,9 @@ public:
 int main()
 {
     A a;
-    auto d = BIND(&A::foo, &a); // Delegate<int, int>::from_function<A, &A::foo>(&a);
-    auto d2 = BIND(&A::bar, &a);// Delegate<int, int, int, char>::from_function<A, &A::bar>(&a);
-    auto d3 = BIND(&A::crazy, &a);
+    auto d = DELEGATE(&A::foo, &a); // Delegate<int, int>::from_function<A, &A::foo>(&a);
+    auto d2 = DELEGATE(&A::bar, &a);// Delegate<int, int, int, char>::from_function<A, &A::bar>(&a);
+    auto d3 = DELEGATE(&A::crazy, &a);
     printf("calling delegate with return value: d(42)=%d\n", d(42));
     printf("calling delegate d2 with return value: d2(42, 2, 'a')=%d\n", d2(42, 2, 'a'));
     d3(5, 'a', 4.5, "sheeeet!");
