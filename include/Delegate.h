@@ -32,27 +32,36 @@ private:
     Pointer2Function fpCallbackFunction;
 };
 
+/**
+ * A DelegateFactory is used to create a Delegate for a certain method call.
+ * It takes care of setting up the function that will cast the object that is stored
+ * inside the Delegate back to the correct type.
+ */
 template<typename T, typename return_type, typename... params>
-struct HelperTag
+struct DelegateFactory
 {
     template<return_type (T::*Func)(params...)>
-    static return_type Wrapper(void* o, params... xs)
+    static return_type MethodCaller(void* o, params... xs)
     {
         return (static_cast<T*>(o)->*Func)(xs...);
     }
 
     template<return_type (T::*Func)(params...)>
-    inline static Delegate<return_type, params...> Bind(T* o)
+    inline static Delegate<return_type, params...> Create(T* o)
     {
-        return Delegate<return_type, params...>(o, &HelperTag::Wrapper<Func>);
+        return Delegate<return_type, params...>(o, &DelegateFactory::MethodCaller<Func>);
     }
 };
+/**
+ * helper function that is used to deduce the template arguments.
+ * will return a DelegateFactory
+ */
 template<typename T, typename return_type, typename... params>
-HelperTag<T, return_type, params... > Helper(return_type (T::*)(params...))
+DelegateFactory<T, return_type, params... > MakeDelegate(return_type (T::*)(params...))
 {
-    return HelperTag<T, return_type, params...>();
+    return DelegateFactory<T, return_type, params...>();
 }
 
-#define DELEGATE(func, thisPrt) (Helper(func).Bind<func>(thisPrt))
+#define DELEGATE(func, thisPrt) (MakeDelegate(func).Create<func>(thisPrt))
 
 
