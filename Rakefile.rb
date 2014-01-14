@@ -2,8 +2,8 @@ require 'cxx'
 BuildDir = "BuildDir"
 
 dependent_projects =  [ './project.rb', 'gmock/project.rb']
-tc = "clang"
-# tc = "gcc"
+# tc = "clang"
+tc = "gcc"
 cxx(dependent_projects, BuildDir, tc, './') do
   unittest_flags = {
     :DEFINES => ['UNIT_TEST'],
