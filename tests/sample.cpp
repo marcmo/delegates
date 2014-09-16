@@ -21,6 +21,16 @@ public:
         printf("called crazy with I=%d, wanna=%c, go=%f, crazy=%s\n", I, wanna, go, crazy);
     }
 };
+
+void myFreeFunction()
+{
+    printf("myFreeFunction got called!\n");
+}
+void myFreeFunction2(int x)
+{
+    printf("myFreeFunction2 got called with %d!\n", x);
+}
+
 typedef Delegate<void> ServiceDelegate;
 class Service
 {
@@ -48,6 +58,10 @@ int main()
     printf("calling delegate d2 with return value: d2(42, 2, 'a')=%d\n", d2(42, 2, 'a'));
     const char* ss = "sheet";
     d3(5, 'a', 4.5, ss);
+    auto d5 = DELEGATE2(&myFreeFunction);
+    auto d6 = DELEGATE2(&myFreeFunction2);
+    d5();
+    d6(5);
 
     Service s;
     s.registerDelegate(d4);

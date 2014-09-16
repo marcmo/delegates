@@ -46,10 +46,22 @@ struct DelegateFactory
         return (static_cast<T*>(o)->*Func)(xs...);
     }
 
+    template <return_type (*TFnctPtr)(params...)>
+	static return_type FunctionCaller(void*, params... xs)
+	{
+		return (TFnctPtr)(xs...);
+	}
+
     template<return_type (T::*Func)(params...)>
     inline static Delegate<return_type, params...> Create(T* o)
     {
         return Delegate<return_type, params...>(o, &DelegateFactory::MethodCaller<Func>);
+    }
+
+    template<return_type (*TFnctPtr)(params...)>
+    inline static Delegate<return_type, params...> CreateForFunction()
+    {
+        return Delegate<return_type, params...>(0L, &DelegateFactory::FunctionCaller<TFnctPtr>);
     }
 };
 /**
@@ -61,7 +73,14 @@ DelegateFactory<T, return_type, params... > MakeDelegate(return_type (T::*)(para
 {
     return DelegateFactory<T, return_type, params...>();
 }
+class no_type{};
+template<typename return_type, typename... params>
+DelegateFactory<no_type, return_type, params... > MakeDelegate2(return_type (*TFnctPtr)(params...))
+{
+    return DelegateFactory<no_type, return_type, params...>();
+}
 
 #define DELEGATE(func, thisPrt) (MakeDelegate(func).Create<func>(thisPrt))
+#define DELEGATE2(func) (MakeDelegate2(func).CreateForFunction<func>())
 
 
