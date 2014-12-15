@@ -3,10 +3,11 @@ delegates
 
 small delegate implementation
 
-To build the examples, you can do a
+To build & run the examples, you can do a
 
-    $ bundle install
-    $ rake run:sample
+    $ make run
+
+---
 
 I wanted a delegate implementation that is
 
