@@ -6,7 +6,10 @@
  *                      of the captured function
  */
 template<typename return_type, typename... params>
-class Delegate
+class Delegate; //forward declaration..
+
+template<typename return_type, typename... params>
+class Delegate<return_type(params...)>
 {
     typedef return_type (*Pointer2Function)(void* callee, params...);
 public:
@@ -53,15 +56,15 @@ struct DelegateFactory
 	}
 
     template<return_type (T::*Func)(params...)>
-    inline static Delegate<return_type, params...> Create(T* o)
+    inline static Delegate<return_type(params...)> Create(T* o)
     {
-        return Delegate<return_type, params...>(o, &DelegateFactory::MethodCaller<Func>);
+        return Delegate<return_type(params...)>(o, &DelegateFactory::MethodCaller<Func>);
     }
 
     template<return_type (*TFnctPtr)(params...)>
-    inline static Delegate<return_type, params...> CreateForFunction()
+    inline static Delegate<return_type(params...)> CreateForFunction()
     {
-        return Delegate<return_type, params...>(0L, &DelegateFactory::FunctionCaller<TFnctPtr>);
+        return Delegate<return_type(params...)>(0L, &DelegateFactory::FunctionCaller<TFnctPtr>);
     }
 };
 /**
@@ -80,7 +83,7 @@ DelegateFactory<no_type, return_type, params... > MakeDelegate2(return_type (*TF
     return DelegateFactory<no_type, return_type, params...>();
 }
 
-#define DELEGATE(func, thisPrt) (MakeDelegate(func).Create<func>(thisPrt))
+#define DELEGATE(func, thisPrtRef) (MakeDelegate(func).Create<func>(&thisPrtRef))
 #define DELEGATE2(func) (MakeDelegate2(func).CreateForFunction<func>())
 
 
