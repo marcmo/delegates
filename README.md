@@ -1,7 +1,8 @@
 delegates
 =========
 
-small delegate implementation
+small delegate implementation. can be used as header-only library.  
+To install, just drop in the Delegate.h and include it.
 
 To build & run the examples, you can do a
 
