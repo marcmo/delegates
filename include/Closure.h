@@ -11,7 +11,6 @@ class Closure
 public:
     typedef Delegate<int(P1)> ClosureDelegate;
     Closure()
-        // : fDelegate(DELEGATE(&Closure::operator(), *this))
     {}
 
     Closure
@@ -20,7 +19,6 @@ public:
          P1 param1
         )
         : fClosureDelegate(closureDelegate)
-        // , fDelegate(DELEGATE(&Closure::operator(), *this))
         , fParameter1(param1)
     {}
 
@@ -33,7 +31,6 @@ public:
     {
         if (this != &closure)
         {
-            // fDelegate = closure.fDelegate;
             fClosureDelegate = closure.fClosureDelegate;
             fParameter1 = closure.fParameter1;
         }
@@ -54,7 +51,6 @@ public:
 
     private:
     ClosureDelegate fClosureDelegate;
-    // VoidDelegate fDelegate;
     P1 fParameter1;
 };
 
