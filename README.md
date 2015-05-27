@@ -26,39 +26,43 @@ In an older implementation I coded all template specializations from hand. But n
 
 simple usage example:
 
-    class A
-    {
-    public:
-        int foo(int x) { return x*x; }
-    };
-    ...
-    A a;
-    auto d = DELEGATE(&A::foo, a);
-    d(42);
+```cpp
+class A
+{
+public:
+    int foo(int x) { return x*x; }
+};
+...
+A a;
+auto d = DELEGATE(&A::foo, a);
+d(42);
+```
 
 Delegates can be passed along and be stored for later usage:
 
-    typedef Delegate<int(int)> ServiceDelegate;
+```cpp
+typedef Delegate<int(int)> ServiceDelegate;
 
-    class Service
-    {
-    public:
-        void registerDelegate(ServiceDelegate& d) {
-            mD = &d;
-        }
-        void notifyDelegate(int x) {
-            (*mD)(x);
-        }
+class Service
+{
+public:
+    void registerDelegate(ServiceDelegate& d) {
+        mD = &d;
+    }
+    void notifyDelegate(int x) {
+        (*mD)(x);
+    }
 
-    private:
-        ServiceDelegate* mD;
-    };
+private:
+    ServiceDelegate* mD;
+};
 
-    auto d = DELEGATE(&A::foo, a);
-    Service s;
-    registerDelegate(d);
-    ...
-    s.notifyDelegate(42);
+auto d = DELEGATE(&A::foo, a);
+Service s;
+registerDelegate(d);
+...
+s.notifyDelegate(42);
+```
 
 ## Update
 
@@ -68,29 +72,37 @@ now works also with const member functions!
 
 Say you have a class A with a couple of member functions
 
-    class A
-    {
-    public:
-        int square(int x);
-        int square_const(int x) const;
-        ...
-    };
+```cpp
+class A
+{
+public:
+    int square(int x);
+    int square_const(int x) const;
+    ...
+};
+```
 
 To create a delegate (callable entity that can be passed around by value):
 
 ### for regular member functions
 
-    auto d = DELEGATE(&A::square, a);
+```cpp
+auto d = DELEGATE(&A::square, a);
+```
 
 ### for const member functions
 
-    auto d = DELEGATE_CONST(&A::square_const, a);
+```cpp
+auto d = DELEGATE_CONST(&A::square_const, a);
+```
 
 ### for free functions
 
-    static void myFreeFunction(){ ... }
-    ...
-    auto d = DELEGATE_FREE(&myFreeFunction);
+```cpp
+static void myFreeFunction(){ ... }
+...
+auto d = DELEGATE_FREE(&myFreeFunction);
+```
 
 Further examples can be found in the test directory. To build and execute the tests, just type
 
