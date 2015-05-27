@@ -10,6 +10,10 @@ public:
     {
         return x*x;
     }
+    int square_const(int x) const
+    {
+        return x*x;
+    }
     int addOrMultiply(int x, int y, char a)
     {
         return a == 'a' ? x+y : x*y;
@@ -67,6 +71,13 @@ private:
 TEST_CASE("DelegateTest: simple call", "[calls]")
 {
     A a;
+    SECTION("call const function")
+    {
+        auto d = DELEGATE_CONST(&A::square_const, a); // Delegate<int, int>::from_function<A, &A::square_const>(&a);
+        REQUIRE(25 == d(5));
+        auto d2 = MakeDelegateC(&A::square_const).CreateC<&A::square_const>(&a);
+        REQUIRE(25 == d2(5));
+    }
     SECTION("call with 1 parameter")
     {
         auto d = DELEGATE(&A::square, a); // Delegate<int, int>::from_function<A, &A::square>(&a);
@@ -86,16 +97,16 @@ TEST_CASE("DelegateTest: simple call", "[calls]")
     }
     SECTION("calling free function")
     {
-        auto d = DELEGATE2(&myFreeFunction);
+        auto d = DELEGATE_FREE(&myFreeFunction);
         REQUIRE(!myFreeFunctionGotCalled);
         Service s;
         s.registerDelegate(d);
         s.notifyDelegate();
         REQUIRE(myFreeFunctionGotCalled);
     }
-    SECTION("calling free function")
+    SECTION("calling free function with argument")
     {
-        auto d = DELEGATE2(&myFreeFunction2);
+        auto d = DELEGATE_FREE(&myFreeFunction2);
         REQUIRE(!myFreeFunction2GotCalled);
         Service2 s2;
         s2.registerDelegate(d);
@@ -104,4 +115,5 @@ TEST_CASE("DelegateTest: simple call", "[calls]")
         REQUIRE(345 == myFreeFunction2parameter);
     }
 }
+
 
