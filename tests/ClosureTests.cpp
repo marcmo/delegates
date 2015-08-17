@@ -14,12 +14,12 @@ public:
 };
 TEST_CASE("ClosureTest: simple call", "[calls]")
 {
-    typedef Closure<int> IntClosure;
     SECTION("call with 1 parameter")
     {
         A a;
-        IntClosure::ClosureDelegate d = DELEGATE(&A::foo, a); // Delegate<int, int>::from_function<A, &A::foo>(&a);
-        IntClosure c(d, 42);
+        // Delegate<int, int>::from_function<A, &A::foo>(&a);
+        auto c = make_closure(&A::foo, a, 42);
+        printf("type or c: %s\n", typeid(c).name());
         REQUIRE(84 == c());
     }
 

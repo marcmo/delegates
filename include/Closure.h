@@ -1,58 +1,41 @@
 #ifndef CLOSURE_H_
 #define CLOSURE_H_
 
-#include "Delegate.h"
-
-typedef Delegate<void()> VoidDelegate;
-
-template<typename P1>
-class Closure
+template<typename T>
+class closure;
+template<typename T, typename R, typename B, typename... Params>
+class closure<R (T::*)(B, Params...)>
 {
 public:
-    typedef Delegate<int(P1)> ClosureDelegate;
-    Closure()
+    typedef R (T::*func_type)(B, Params...);
+
+    closure(func_type func, T& callee, B bound)
+        : fpCallee(&callee)
+        , fpFunc(func)
+        , fBound(bound)
     {}
 
-    Closure
-        (
-         ClosureDelegate closureDelegate,
-         P1 param1
-        )
-        : fClosureDelegate(closureDelegate)
-        , fParameter1(param1)
-    {}
-
-    Closure(const Closure& closure) :
-        fClosureDelegate(closure.fClosureDelegate),
-        fParameter1(closure.fParameter1)
-    {}
-
-    Closure& operator=(const Closure& closure)
+    R operator()(Params... args) const
     {
-        if (this != &closure)
-        {
-            fClosureDelegate = closure.fClosureDelegate;
-            fParameter1 = closure.fParameter1;
-        }
-        return *this;
+        return (fpCallee->*fpFunc)(fBound, args...);
     }
 
-    int operator()()
+    bool operator==(const closure& other) const
     {
-        return fClosureDelegate(fParameter1);
+        return (fpCallee == other.fpCallee)
+               && (fpFunc == other.fpFunc)
+               && (fBound == other.fBound);
     }
 
-    template <class T, void (T::*MethodPointer)(P1)>
-        static Closure fromObject(T& callee, P1 param1)
-        {
-            ClosureDelegate d(ClosureDelegate::template registerCallee< T, MethodPointer>(callee));
-            return Closure( d, param1);
-        }
-
-    private:
-    ClosureDelegate fClosureDelegate;
-    P1 fParameter1;
+private:
+    T* fpCallee;
+    func_type fpFunc;
+    B fBound;
 };
-
+template<typename F, typename T, typename B>
+closure<F> make_closure(F func, T& obj, B b)
+{
+    return closure<F>(func, obj, b);
+}
 
 #endif /* CLOSURE_H_ */
