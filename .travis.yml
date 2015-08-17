@@ -1,4 +1,5 @@
 language: cpp
+sudo: false
 before_script: ls
 compiler:
   - clang
