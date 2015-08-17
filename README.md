@@ -10,8 +10,6 @@ To build & run the examples, you can do a
 
     $ make test
 
----
-
 ## Why would I want delegates?
 
 This implementation is just a tiny library that is
