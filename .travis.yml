@@ -1,0 +1,7 @@
+language: cpp
+before_script: ls
+compiler:
+  - clang
+script:
+  - make
+
