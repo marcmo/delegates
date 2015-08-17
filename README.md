@@ -34,14 +34,14 @@ public:
 };
 ...
 A a;
-auto d = DELEGATE(&A::foo, a);
+auto d = make_delegate(&A::foo, a);
 d(42);
 ```
 
 Delegates can be passed along and be stored for later usage:
 
 ```cpp
-typedef Delegate<int(int)> ServiceDelegate;
+typedef delegate<int(*)(int)> ServiceDelegate;
 
 class Service
 {
@@ -57,7 +57,7 @@ private:
     ServiceDelegate* mD;
 };
 
-auto d = DELEGATE(&A::foo, a);
+auto d = make_delegate(&A::foo, a);
 Service s;
 registerDelegate(d);
 ...
@@ -87,13 +87,13 @@ To create a delegate (callable entity that can be passed around by value):
 ### for regular member functions
 
 ```cpp
-auto d = DELEGATE(&A::square, a);
+auto d = make_delegate(&A::square, a);
 ```
 
 ### for const member functions
 
 ```cpp
-auto d = DELEGATE_CONST(&A::square_const, a);
+auto d = make_delegate(&A::square_const, a);
 ```
 
 ### for free functions
@@ -101,7 +101,7 @@ auto d = DELEGATE_CONST(&A::square_const, a);
 ```cpp
 static void myFreeFunction(){ ... }
 ...
-auto d = DELEGATE_FREE(&myFreeFunction);
+auto d = make_delegate(&myFreeFunction);
 ```
 
 Further examples can be found in the test directory. To build and execute the tests, just type

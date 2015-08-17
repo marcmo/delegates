@@ -99,4 +99,9 @@ delegate<T> make_delegate(T func)
     return delegate<T>(func);
 }
 
+// a little backward compatilbility layer
+#define DELEGATE make_delegate
+#define DELEGATE_CONST make_delegate
+#define DELEGATE_FREE make_delegate
+
 

@@ -73,7 +73,7 @@ TEST_CASE("DelegateTest: member function calls", "[calls]")
     A a;
     SECTION("call const function")
     {
-        auto d = make_delegate(&A::square, a); // Delegate<int, int>::from_function<A, &A::square_const>(&a);
+        auto d = DELEGATE(&A::square, a); // Delegate<int, int>::from_function<A, &A::square_const>(&a);
         REQUIRE(25 == d(5));
         auto d2 = make_delegate(&A::square_const, a); // Delegate<int, int>::from_function<A, &A::square_const>(&a);
         REQUIRE(25 == d2(5));
