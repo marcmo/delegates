@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/marcmo/delegates.svg?branch=master)](http://travis-ci.org/marcmo/delegates)
+
 delegates
 =========
 
