@@ -35,12 +35,12 @@ theme = "hugo-agency-theme"
 
 	# Navigation
 	[params.navigation]
-		brand = "The Agency"
+		brand = "functional C++"
 		services = "Features"
 		portfolio = "Portfolio"
 		about = "About"
 		team = "Team"
-		contact = "Contact"
+		# contact = "Contact"
 
 
 	# Hero section
@@ -55,32 +55,37 @@ theme = "hugo-agency-theme"
 	# Services section
 	[params.services]
 		title = "Features"
-		subtitle = "Lorem ipsum dolor sit amet consectetur."
+		subtitle = "Some of the advantages of using delegates."
 
 		[[params.services.list]]
-			icon = "fa-fighter-jet"
+			icon = "fa-bolt"
 			title = "fast"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
+			description = "faster then all other implementions I tried"
 
 		[[params.services.list]]
-			icon = "fa-laptop"
+			icon = "fa-heart"
 			title = "light-weight"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
+			description = "minimal memory footprint"
 
 		[[params.services.list]]
 			icon = "fa-battery-4"
-			title = "Web"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
-
-		[[params.services.list]]
-			icon = "fa-lock"
 			title = "easy-to-use"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."
+			description = "just include one header file and be done -- no need to compile anything"
 
 		[[params.services.list]]
 			icon = "fa-globe"
 			title = "Portable"
 			description = "only requires a C++11 compatible compiler - no architecture or hardware dependent code"
+
+		[[params.services.list]]
+			icon = "fa-globe"
+			title = "no dynamic memory allocation"
+			description = "stay in controll of your resources -- implementation does not use malloc/new"
+
+		[[params.services.list]]
+			icon = "fa-code"
+			title = "nice syntax"
+			description = "uses template argument deduction so you don't have to encode the types yourself"
 
 
 	# Portfolio section
@@ -174,67 +179,60 @@ theme = "hugo-agency-theme"
 	# Client section
 	# All the clients' logos are stored under 'static/img/logos'.
 	# Replace them with your clients's logos.
-	[[params.clients]]
-		logo = "envato.jpg"
-		link = "#"
-
-	[[params.clients]]
-		logo = "designmodo.jpg"
-		link = "#"
-
-	[[params.clients]]
-		logo = "themeforest.jpg"
-		link = "#"
-
-	[[params.clients]]
-		logo = "creative-market.jpg"
-		link = "#"
+	# [[params.clients]]
+	# 	logo = "envato.jpg"
+	# 	link = "#"
+  #
+	# [[params.clients]]
+	# 	logo = "designmodo.jpg"
+	# 	link = "#"
+  #
+	# [[params.clients]]
+	# 	logo = "themeforest.jpg"
+	# 	link = "#"
+  #
+	# [[params.clients]]
+	# 	logo = "creative-market.jpg"
+	# 	link = "#"
 
 
 	# Contact section
-	[params.contact]
-		title = "Contact us"
-		subtitle  = "Lorem ipsum dolor sit amet consectetur."
-		buttonText = "Send message"
-
-		# 'warning' defines error messages for invalid inputs
-		[params.contact.form.name]
-			text = "Your Name *"
-			warning = "Please enter your name."
-
-		[params.contact.form.email]
-			text = "Your Email *"
-			warning = "Please enter your email address."
-
-		[params.contact.form.phone]
-			text = "Your Phone *"
-			warning = "Please enter your phone number."
-
-		[params.contact.form.message]
-			text = "Your Message *"
-			warning = "Please enter a message."
+	# [params.contact]
+	# 	title = "Contact us"
+	# 	subtitle  = "Lorem ipsum dolor sit amet consectetur."
+	# 	buttonText = "Send message"
+  #
+	# 	# 'warning' defines error messages for invalid inputs
+	# 	[params.contact.form.name]
+	# 		text = "Your Name *"
+	# 		warning = "Please enter your name."
+  #
+	# 	[params.contact.form.email]
+	# 		text = "Your Email *"
+	# 		warning = "Please enter your email address."
+  #
+	# 	[params.contact.form.phone]
+	# 		text = "Your Phone *"
+	# 		warning = "Please enter your phone number."
+  #
+	# 	[params.contact.form.message]
+	# 		text = "Your Message *"
+	# 		warning = "Please enter a message."
 
 
 	# Footer section
 	[params.footer]
-		copyright = "Published under the Apache License 2.0."
+		copyright = "Published under the MIT License."
 
 		[[params.footer.social]]
 			icon = "fa-twitter"
-			link = "#"
+			link = "https://twitter.com/marcontwit"
 
 		[[params.footer.social]]
-			icon = "fa-facebook"
-			link = "#"
+			icon = "fa-github-alt"
+			link = "https://github.com/marcmo"
 
 		[[params.footer.social]]
-			icon = "fa-linkedin"
-			link = "#"
+			icon = "fa-envelope"
+			link = "mailto:oliver.mueller@gmail.com"
 
-		[[params.footer.quicklinks]]
-			text = "Privacy Policy"
-			link = "#"
-
-		[[params.footer.quicklinks]]
-			text = "Terms of Use"
-			link = "#"
