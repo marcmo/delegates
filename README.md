@@ -3,16 +3,16 @@
 delegates
 =========
 
-small delegate implementation. can be used as header-only library.  
+Small delegate implementation. Can be used as header-only library.  
 To install, just drop in the Delegate.h and include it.
 
 To build & run the examples, you can do a
 
     $ make test
 
-## Why would I want delegates?
+## Why would I use delegates?
 
-This implementation is just a tiny library that is
+This implementation is just a tiny header-only library that is
 
 * Fast
 * Portable C++
@@ -66,7 +66,8 @@ s.notifyDelegate(42);
 
 ## Update
 
-now works also with const member functions!
+* now works also with const member functions!
+* no macros needed anymore!
 
 ## Usage
 
@@ -110,5 +111,8 @@ Further examples can be found in the test directory. To build and execute the te
 
 ## Credits
 
-inspired by the [The Impossibly Fast C++ Delegates](http://www.codeproject.com/Articles/11015/The-Impossibly-Fast-C-Delegates) and [Lightweight Generic C++ Callbacks (or, Yet Another Delegate Implementation)](http://www.codeproject.com/Articles/136799/Lightweight-Generic-C-Callbacks-or-Yet-Another-Del)
+inspired by
+
+* the [The Impossibly Fast C++ Delegates](http://www.codeproject.com/Articles/11015/The-Impossibly-Fast-C-Delegates)
+* and [Lightweight Generic C++ Callbacks (or, Yet Another Delegate Implementation)](http://www.codeproject.com/Articles/136799/Lightweight-Generic-C-Callbacks-or-Yet-Another-Del)
 
