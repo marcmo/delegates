@@ -18,14 +18,14 @@ $(BUILD_DIR):
 $(CLOSURETEST): $(BUILD_DIR)/closureTest.o
 	$(CC) -o $(CLOSURETEST) $(BUILD_DIR)/closureTest.o
 
-$(BUILD_DIR)/closureTest.o: tests/ClosureTests.cpp include/Delegate.h include/Closure.h $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(INC) -o$(BUILD_DIR)/closureTest.o tests/ClosureTests.cpp
+$(BUILD_DIR)/closureTest.o: tests/closureTests.cpp include/delegate.h include/closure.h $(BUILD_DIR)
+	$(CC) $(CFLAGS) $(INC) -o$(BUILD_DIR)/closureTest.o tests/closureTests.cpp
 
 $(DELEGATETEST): $(BUILD_DIR)/delegateTest.o
 	$(CC) -o $(DELEGATETEST) $(BUILD_DIR)/delegateTest.o
 
-$(BUILD_DIR)/delegateTest.o: tests/DelegateTests.cpp include/Delegate.h include/Delegate.h $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(INC) -o$(BUILD_DIR)/delegateTest.o tests/DelegateTests.cpp
+$(BUILD_DIR)/delegateTest.o: tests/delegateTests.cpp include/delegate.h include/delegate.h $(BUILD_DIR)
+	$(CC) $(CFLAGS) $(INC) -o$(BUILD_DIR)/delegateTest.o tests/delegateTests.cpp
 
 clean:
 	rm -rf $(BUILD_DIR)
