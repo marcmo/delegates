@@ -3,24 +3,26 @@
 #include "catch.hpp"
 #include "stdio.h"
 
+using namespace dlgt;
 class A
 {
 public:
     int square(int x)
     {
-        return x*x;
+        return x * x;
     }
     int square_const(int x) const
     {
-        return x*x;
+        return x * x;
     }
     int addOrMultiply(int x, int y, char a)
     {
-        return a == 'a' ? x+y : x*y;
+        return a == 'a' ? x + y : x * y;
     }
-    float crazy(int I, char wanna, float go, const char* crazy)
+    float crazy(int I, char wanna, float go, const char *crazy)
     {
-        printf("called crazy with I=%d, wanna=%c, go=%f, crazy=%s\n", I, wanna, go, crazy);
+        printf("called crazy with I=%d, wanna=%c, go=%f, crazy=%s\n", I, wanna,
+               go, crazy);
         return I + go;
     }
 };
@@ -37,11 +39,11 @@ static void myFreeFunction2(int x)
     myFreeFunction2parameter = x;
 }
 
-typedef delegate<void(*)()> ServiceDelegate;
+typedef delegate<void (*)()> ServiceDelegate;
 class Service
 {
 public:
-    void registerDelegate(ServiceDelegate& d)
+    void registerDelegate(ServiceDelegate &d)
     {
         mD = &d;
     }
@@ -49,14 +51,15 @@ public:
     {
         (*mD)();
     }
+
 private:
-    ServiceDelegate* mD;
+    ServiceDelegate *mD;
 };
-typedef delegate<void(*)(int)> ServiceDelegate2;
+typedef delegate<void (*)(int)> ServiceDelegate2;
 class Service2
 {
 public:
-    void registerDelegate(ServiceDelegate2& d)
+    void registerDelegate(ServiceDelegate2 &d)
     {
         mD = &d;
     }
@@ -64,8 +67,9 @@ public:
     {
         (*mD)(x);
     }
+
 private:
-    ServiceDelegate2* mD;
+    ServiceDelegate2 *mD;
 };
 
 TEST_CASE("DelegateTest: member function calls", "[calls]")
@@ -73,26 +77,36 @@ TEST_CASE("DelegateTest: member function calls", "[calls]")
     A a;
     SECTION("call const function")
     {
-        auto d = make_delegate(&A::square, a); // Delegate<int, int>::from_function<A, &A::square_const>(&a);
-        REQUIRE(25 == d(5));
-        auto d2 = make_delegate(&A::square_const, a); // Delegate<int, int>::from_function<A, &A::square_const>(&a);
+        auto d2 = make_delegate(&A::square_const, a);
+        static_assert(
+            std::is_same<delegate<int (A::*)(int) const>, decltype(d2)>::value,
+            "!");
         REQUIRE(25 == d2(5));
     }
     SECTION("call with 1 parameter")
     {
-        auto d = make_delegate(&A::square, a); // Delegate<int, int>::from_function<A, &A::square>(&a);
+        auto d = make_delegate(&A::square, a);
+        static_assert(
+            std::is_same<delegate<int (A::*)(int)>, decltype(d)>::value, "!");
         REQUIRE(25 == d(5));
     }
     SECTION("call with multiple parameters")
     {
-        auto d = make_delegate(&A::addOrMultiply, a);// Delegate<int, int, int, char>::from_function<A, &A::addOrMultiply>(&a);
-        REQUIRE(9 == d(5,4,'a'));
-        REQUIRE(20 == d(5,4,'m'));
+        auto d = make_delegate(&A::addOrMultiply, a);
+        static_assert(
+            std::is_same<delegate<int (A::*)(int, int, char)>, decltype(d)>::value,
+            "!");
+        REQUIRE(9 == d(5, 4, 'a'));
+        REQUIRE(20 == d(5, 4, 'm'));
     }
     SECTION("call with crazy parameters")
     {
         auto d = make_delegate(&A::crazy, a);
-        const char* ss = "sheet";
+        static_assert(
+            std::is_same<delegate<float (A::*)(int, char, float, const char *)>,
+                         decltype(d)>::value,
+            "!");
+        const char *ss = "sheet";
         REQUIRE(9.5 == d(5, 'a', 4.5, ss));
     }
 }
@@ -101,9 +115,9 @@ TEST_CASE("DelegateTest: free function calls", "[calls]")
 {
     SECTION("calling free function")
     {
-        typedef delegate<void(*)()> delegateType;
         auto d = make_delegate(&myFreeFunction);
-        static_assert( std::is_same< delegateType, decltype(d) >::value, "!");
+        static_assert(std::is_same<delegate<void (*)()>, decltype(d)>::value,
+                      "!");
         REQUIRE(!myFreeFunctionGotCalled);
         Service s;
         s.registerDelegate(d);
@@ -113,6 +127,8 @@ TEST_CASE("DelegateTest: free function calls", "[calls]")
     SECTION("calling free function with argument")
     {
         auto d = make_delegate(&myFreeFunction2);
+        static_assert(std::is_same<delegate<void (*)(int)>, decltype(d)>::value,
+                      "!");
         REQUIRE(!myFreeFunction2GotCalled);
         Service2 s2;
         s2.registerDelegate(d);
@@ -121,5 +137,3 @@ TEST_CASE("DelegateTest: free function calls", "[calls]")
         REQUIRE(345 == myFreeFunction2parameter);
     }
 }
-
-

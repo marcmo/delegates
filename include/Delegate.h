@@ -1,3 +1,5 @@
+namespace dlgt
+{
 /**
  * non specialized template declaration for delegate
  */
@@ -120,3 +122,4 @@ delegate<T> make_delegate(T func)
 #define DELEGATE make_delegate
 #define DELEGATE_CONST make_delegate
 #define DELEGATE_FREE make_delegate
+} // namespace delegate
