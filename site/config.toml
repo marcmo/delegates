@@ -1,7 +1,7 @@
 # Site settings
 baseurl = "http://replace-this-with-your-hugo-site.com/"
 languageCode = "en-us"
-title = "Hugo Agency Theme"
+title = "C++ delegates"
 theme = "hugo-agency-theme"
 
 
@@ -37,8 +37,8 @@ theme = "hugo-agency-theme"
 	[params.navigation]
 		brand = "functional C++"
 		services = "Features"
-		portfolio = "Portfolio"
-		about = "About"
+		about = "Usage"
+		portfolio = "Facts"
 		team = "Team"
 		# contact = "Contact"
 
@@ -63,7 +63,7 @@ theme = "hugo-agency-theme"
 			description = "faster then all other implementions I tried"
 
 		[[params.services.list]]
-			icon = "fa-heart"
+			icon = "fa-paper-plane"
 			title = "light-weight"
 			description = "minimal memory footprint"
 
@@ -78,7 +78,7 @@ theme = "hugo-agency-theme"
 			description = "only requires a C++11 compatible compiler - no architecture or hardware dependent code"
 
 		[[params.services.list]]
-			icon = "fa-globe"
+			icon = "fa-star"
 			title = "no dynamic memory allocation"
 			description = "stay in controll of your resources -- implementation does not use malloc/new"
 
@@ -88,25 +88,9 @@ theme = "hugo-agency-theme"
 			description = "uses template argument deduction so you don't have to encode the types yourself"
 
 
-	# Portfolio section
-	[params.portfolio]
-		# All projects defined in their own files. You can find example projects
-		# at 'exampleSite/data/projects'. Copy the 'projects' folder into the 'data' directory
-		# at the root of this Hugo site.
-		# For more informtion take a look at the README.
-		title = "Portfolio"
-		subtitle = "Lorem ipsum dolor sit amet consectetur."
-
-		[params.portfolio.modal]
-            client = "Client"
-            date = "Date"
-            category = "Category"
-            buttonText = "Close project"
-
-
     # About section
 	[params.about]
-		title = "About"
+		title = "Usage"
 		subtitle = "Lorem ipsum dolor sit amet consectetur."
 		endpoint = "Be part<br>of our<br>story!"
 
@@ -136,6 +120,22 @@ theme = "hugo-agency-theme"
 			date = "July 2014"
 			title = "Phase Two Expansion"
 			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
+
+
+	# Portfolio section
+	[params.portfolio]
+		# All projects defined in their own files. You can find example projects
+		# at 'exampleSite/data/projects'. Copy the 'projects' folder into the 'data' directory
+		# at the root of this Hugo site.
+		# For more informtion take a look at the README.
+		title = "Facts"
+		subtitle = "Lorem ipsum dolor sit amet consectetur."
+
+		[params.portfolio.modal]
+            client = "Client"
+            date = "Date"
+            category = "Category"
+            buttonText = "Close project"
 
 
 	# Team section

@@ -1,37 +1,39 @@
 {{ "<!-- About Section -->" | safeHTML }}
-<section id="about">
+<section id="usage" class="bg-light-gray">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">{{ with .Site.Params.about.title }}{{ . }}{{ end }}</h2>
-                <h3 class="section-subheading text-muted">{{ with .Site.Params.about.subtitle }}{{ . | markdownify }}{{ end }}</h3>
+                <h3 class="section-subheading text-mutedwith">{{ with .Site.Params.about.subtitle }}{{ . | markdownify }}{{ end }}</h3>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <ul class="timeline">
-                    {{ range $i, $e := .Site.Params.about.events }}
-                    <li {{ if (not (modBool $i 2)) }}class="timeline-inverted" {{ end }}>
-                        <div class="timeline-image">
-                            <img class="img-circle img-responsive" src="img/about/{{ .img }}" alt="">
-                        </div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>{{ .date }}</h4>
-                                <h4 class="subheading">{{ .title }}</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p class="text-muted">{{ .description  | markdownify }}</p>
-                            </div>
-                        </div>
-                    </li>
-                    {{ end }}
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4>{{ with .Site.Params.about.endpoint }}{{ . | markdownify }}{{ end }}</h4>
-                        </div>
-                    </li>
-                </ul>
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <p class="large text-mutedwith">
+              Passing around functions in functional languages like haskell or clojure is how you program in those languages. Passing around functions in C/C++ is possible but more tedious. The syntax for function
+              pointers is quite daunting and relatively limited in it's application. For example it is not
+              possible to pass a member-function around.</p>
+                <p class="large text-mutedwith">
+              <i>delegates</i> take care of some of the problems and allow to easily pass around and store "functions".
+                </p>
+            </div>
+        </div>
+
+        <div class="row voffset5">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <pre>
+                  <code class="cpp">
+using namespace dlgt;
+class A
+{
+public:
+    int square(int x)
+    {
+        return x * x;
+    }
+                  </code>
+                </pre>
             </div>
         </div>
     </div>
