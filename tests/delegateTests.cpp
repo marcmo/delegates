@@ -4,12 +4,33 @@
 #include "stdio.h"
 
 using namespace dlgt;
+static bool simpleFunctionWasCalled = false;
 class A
 {
 public:
+    void simple()
+    {
+        simpleFunctionWasCalled = true;
+    }
+    void simple_const() const
+    {
+        simpleFunctionWasCalled = true;
+    }
+    int simpleInt()
+    {
+        return 42;
+    }
+    int add(int a, int b)
+    {
+        return a + b;
+    }
     int square(int x)
     {
         return x * x;
+    }
+    int squareStar(int* x)
+    {
+        return *x * *x;
     }
     int square_const(int x) const
     {
@@ -75,20 +96,63 @@ private:
 TEST_CASE("DelegateTest: member function calls", "[calls]")
 {
     A a;
-    SECTION("call const function")
+    SECTION("call void function with 0 parameter")
     {
-        auto d2 = make_delegate(&A::square_const, a);
+        simpleFunctionWasCalled = false;
+        auto d = make_delegate(&A::simple, a);
         static_assert(
-            std::is_same<delegate<int (A::*)(int) const>, decltype(d2)>::value,
+            std::is_same<delegate<void (A::*)()>, decltype(d)>::value,
             "!");
-        REQUIRE(25 == d2(5));
+        d();
+        REQUIRE(simpleFunctionWasCalled);
     }
-    SECTION("call with 1 parameter")
+    SECTION("call function with 0 parameter, returning int")
+    {
+        auto d = make_delegate(&A::simpleInt, a);
+        static_assert(
+            std::is_same<delegate<int (A::*)()>, decltype(d)>::value,
+            "!");
+        REQUIRE(d() == 42);
+    }
+    SECTION("call with 1 parameter, returning int")
     {
         auto d = make_delegate(&A::square, a);
         static_assert(
             std::is_same<delegate<int (A::*)(int)>, decltype(d)>::value, "!");
         REQUIRE(25 == d(5));
+    }
+    SECTION("call with 1 parameter (pointer), returning int")
+    {
+        auto d = make_delegate(&A::squareStar, a);
+        static_assert(
+            std::is_same<delegate<int (A::*)(int*)>, decltype(d)>::value, "!");
+        int in = 5;
+        REQUIRE(25 == d(&in));
+    }
+    SECTION("call const void function with 0 parameter")
+    {
+        simpleFunctionWasCalled = false;
+        auto d = make_delegate(&A::simple_const, a);
+        static_assert(
+            std::is_same<delegate<void (A::*)() const>, decltype(d)>::value,
+            "!");
+        d();
+        REQUIRE(simpleFunctionWasCalled);
+    }
+    SECTION("call const function with 1 parameter, returning int")
+    {
+        auto d = make_delegate(&A::square_const, a);
+        static_assert(
+            std::is_same<delegate<int (A::*)(int) const>, decltype(d)>::value,
+            "!");
+        REQUIRE(25 == d(5));
+    }
+    SECTION("call with 2 parameter, returning int")
+    {
+        auto d = make_delegate(&A::add, a);
+        static_assert(
+            std::is_same<delegate<int (A::*)(int, int)>, decltype(d)>::value, "!");
+        REQUIRE(9 == d(4, 5));
     }
     SECTION("call with multiple parameters")
     {
