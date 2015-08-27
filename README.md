@@ -15,7 +15,7 @@ To build & run the examples, you can do a
 This implementation is just a tiny header-only library that is
 
 * Fast
-* Portable C++
+* Portable C++ (also supports non C++03)
 * header only (nothing to link or build)
 * does NOT use dynamic memory allocation
 * has a nice syntax
@@ -115,4 +115,48 @@ inspired by
 
 * the [The Impossibly Fast C++ Delegates](http://www.codeproject.com/Articles/11015/The-Impossibly-Fast-C-Delegates)
 * and [Lightweight Generic C++ Callbacks (or, Yet Another Delegate Implementation)](http://www.codeproject.com/Articles/136799/Lightweight-Generic-C-Callbacks-or-Yet-Another-Del)
+
+## Benchmarks
+
+### Linux/Ubuntu
+
+#### clang 3.4.2
+
+    ~/tmp/delegates.git <master> $ make bench
+    clang++ -c -Wall -O0 -g3 -std=c++11 -Iinclude -oBuildDir/benchmark.o src/benchmark.cpp
+    clang++ -c -Wall -O0 -g3 -std=c++11 -Iinclude -oBuildDir/benchmark_worker.o src/benchmark_worker.cpp
+    clang++ -o BuildDir/benchmark.exe BuildDir/benchmark_worker.o BuildDir/benchmark.o
+    ./BuildDir/benchmark.exe
+    ********** delegates: **********
+    took 745.138018d ms
+    counter=97619147
+    ********** std::function: **********
+    took 3244.926665d ms
+    counter=97619147
+    ********** std::bind: **********
+    took 2197.354233d ms
+    counter=97619147
+    ********** lambda: **********
+    took 646.538980d ms
+    counter=97619147
+
+#### gcc 4.8.3
+
+    ~/tmp/delegates.git <master> $ make bench
+    g++ -c -Wall -O0 -g3 -std=c++11 -Iinclude -oBuildDir/benchmark.o src/benchmark.cpp
+    g++ -c -Wall -O0 -g3 -std=c++11 -Iinclude -oBuildDir/benchmark_worker.o src/benchmark_worker.cpp
+    g++ -o BuildDir/benchmark.exe BuildDir/benchmark_worker.o BuildDir/benchmark.o
+    ./BuildDir/benchmark.exe
+    ********** delegates: **********
+    took 628.410903d ms
+    counter=97619147
+    ********** std::function: **********
+    took 3504.065734d ms
+    counter=97619147
+    ********** std::bind: **********
+    took 2948.029087d ms
+    counter=97619147
+    ********** lambda: **********
+    took 535.643261d ms
+    counter=97619147
 
