@@ -1,5 +1,5 @@
 {{ "<!-- About Section -->" | safeHTML }}
-<section id="usage" class="bg-light-gray">
+<section id="usage" class="bg-light-gray text-on-dark">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -14,7 +14,7 @@
               pointers is quite daunting and relatively limited in it's application. For example it is not
               possible to pass a member-function around.</p>
                 <p class="large text-mutedwith">
-              <i>delegates</i> take care of some of the problems and allow to easily pass around and store "functions".
+              <b>delegates</b> take care of some of the problems and allow to easily pass around and store "functions".
                 </p>
             </div>
         </div>
@@ -24,7 +24,6 @@
 
                 <pre>
                   <code class="cpp">
-using namespace dlgt;
 class A
 {
 public:
@@ -32,9 +31,67 @@ public:
     {
         return x * x;
     }
+};
+...
+auto d = make_delegate(&A::square, a);
+...
                   </code>
                 </pre>
             </div>
         </div>
+
+        <div class="row voffset5">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <p class="large text-mutedwith">
+                  It doesn't matter how many arguments the function has. Template argument deduction takes care of that.
+                </p>
+            </div>
+        </div>
+
+        <div class="row voffset5">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <pre>
+                  <code class="cpp">
+class A
+{
+public:
+    float crazy(int I, char wanna, float go, const char *crazy)
+    {
+      ...
+    }
+};
+...
+auto d = make_delegate(&A::crazy, a);
+...
+                  </code>
+                </pre>
+            </div>
+        </div>
+
+        <div class="row voffset5">
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+              <h2 class="col-lg-12 text-center">Type of delegates</h2>
+                <p class="large text-mutedwith">
+                  If you wanna know what type the delegate has, just provoke a compiler error. This will tell you the correct type:
+                </p>
+            </div>
+        </div>
+        <div class="row voffset5">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <pre>
+                  <code class="cpp">
+int d = make_delegate(&A::crazy, a);
+...
+tests/delegateTests.cpp:104:13: error:
+  no viable conversion from 'delegate&lt;float (A::*)(int, char, float, const char *)&gt;' to 'int'
+        int d = make_delegate(&amp;A::crazy, a);
+                    ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                  </code>
+                </pre>
+            </div>
+        </div>
+
     </div>
 </section>

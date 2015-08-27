@@ -1,10 +1,14 @@
 {{ "<!-- Hero -->" | safeHTML }}
 <header>
-    <div class="container">
+    <div class="container-fluid">
         <div class="intro-text">
             <div class="intro-lead-in">{{ with .Site.Params.hero.title }}{{ . }}{{ end }}</div>
             <div class="intro-heading">{{ with .Site.Params.hero.subtitle }}{{ . }}{{ end }}</div>
-            <a href="#services" class="page-scroll btn btn-xl">{{ with .Site.Params.hero.buttonText }}{{ . }}{{ end }}</a>
+            <a href="#features" class="page-scroll btn btn-xl">{{ with .Site.Params.hero.buttonText }}{{ . }}{{ end }}</a>
+            <section class="row">
+              <div class="code col-md-4">
+              </div>
+            </section>
         </div>
     </div>
 </header>

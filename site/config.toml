@@ -7,21 +7,21 @@ theme = "hugo-agency-theme"
 
 [params]
 
-	# You can use Markdown syntax for urls [text](//url.to/source) or
-	# most longer texts.
-	#
-	# All icons using Fontawesome's icon font. Look at fortawesome.github.io/Font-Awesome/icons/
-	# for more icons. The icons are represented by their corresponding
-	# CSS class.
+  # You can use Markdown syntax for urls [text](//url.to/source) or
+  # most longer texts.
+  #
+  # All icons using Fontawesome's icon font. Look at fortawesome.github.io/Font-Awesome/icons/
+  # for more icons. The icons are represented by their corresponding
+  # CSS class.
 
-	# To provide some metadata for search engines feel free to add a few
+  # To provide some metadata for search engines feel free to add a few
     # information about you and your website.
-	name = "Oliver Mueller"
-	description = "marcmo"
+  name = "Oliver Mueller"
+  description = "marcmo"
 
-	# Since this template is static, the contact form uses www.formspree.io as a
-	# proxy. The form makes a POST request to their servers to send the actual
-	# email. Visitors can send up to a 1000 emails each month for free.
+  # Since this template is static, the contact form uses www.formspree.io as a
+  # proxy. The form makes a POST request to their servers to send the actual
+  # email. Visitors can send up to a 1000 emails each month for free.
     #
     # What you need to do for the setup?
     #
@@ -30,209 +30,191 @@ theme = "hugo-agency-theme"
     # - send a dummy email yourself to confirm your account
     # - click the confirm link in the email from www.formspree.io
     # - you're done. Happy mailing!
-	email = "oliver.mueller@gmail.com"
+  email = "oliver.mueller@gmail.com"
 
 
-	# Navigation
-	[params.navigation]
-		brand = "functional C++"
-		services = "Features"
-		about = "Usage"
-		portfolio = "Facts"
-		team = "Team"
-		# contact = "Contact"
+  # Navigation
+  [params.navigation]
+    brand = "callbacks for C++"
+    services = "Features"
+    about = "Examples"
+    portfolio = "Facts"
+    team = "Usage"
+    # contact = "Contact"
 
 
-	# Hero section
-	[params.hero]
-		# To change the background image of the hero, replace 'header-bg.jpg' in
-		# the 'static/img' folder.
-		title = "blazingly fast, lightweight, header only"
-		subtitle = "delegates"
-		buttonText = "Tell me more"
+  # Hero section
+  [params.hero]
+    # To change the background image of the hero, replace 'header-bg.jpg' in
+    # the 'static/img' folder.
+    title = "blazingly fast, lightweight, header only"
+    subtitle = "delegates"
+    buttonText = "why"
 
 
-	# Services section
-	[params.services]
-		title = "Features"
-		subtitle = "Some of the advantages of using delegates."
+  # Services section
+  [params.services]
+    title = "Features"
+    subtitle = "Some of the advantages of using delegates."
 
-		[[params.services.list]]
-			icon = "fa-bolt"
-			title = "fast"
-			description = "faster then all other implementions I tried"
+    [[params.services.list]]
+      icon = "fa-bolt"
+      title = "fast"
+      description = "see benchmark section for details"
 
-		[[params.services.list]]
-			icon = "fa-paper-plane"
-			title = "light-weight"
-			description = "minimal memory footprint"
+    [[params.services.list]]
+      icon = "fa-paper-plane"
+      title = "light-weight"
+      description = "minimal memory footprint"
 
-		[[params.services.list]]
-			icon = "fa-battery-4"
-			title = "easy-to-use"
-			description = "just include one header file and be done -- no need to compile anything"
+    [[params.services.list]]
+      icon = "fa-battery-4"
+      title = "easy-to-use"
+      description = "just include one header file and be done -- no need to compile anything"
 
-		[[params.services.list]]
-			icon = "fa-globe"
-			title = "Portable"
-			description = "only requires a C++11 compatible compiler - no architecture or hardware dependent code"
+    [[params.services.list]]
+      icon = "fa-globe"
+      title = "Portable"
+      description = "only requires a C++11 compatible compiler - no architecture or hardware dependent code"
 
-		[[params.services.list]]
-			icon = "fa-star"
-			title = "no dynamic memory allocation"
-			description = "stay in controll of your resources -- implementation does not use malloc/new"
+    [[params.services.list]]
+      icon = "fa-star"
+      title = "no dynamic memory allocation"
+      description = "stay in controll of your resources -- implementation does not use malloc/new"
 
-		[[params.services.list]]
-			icon = "fa-code"
-			title = "nice syntax"
-			description = "uses template argument deduction so you don't have to encode the types yourself"
+    [[params.services.list]]
+      icon = "fa-code"
+      title = "nice syntax"
+      description = "uses template argument deduction so you don't have to encode the types yourself"
 
 
     # About section
-	[params.about]
-		title = "Usage"
-		subtitle = "Lorem ipsum dolor sit amet consectetur."
-		endpoint = "Be part<br>of our<br>story!"
+  [params.about]
+    title = "Examples"
+    subtitle = "if it's not easy to use it's useless"
+    endpoint = "Be part<br>of our<br>story!"
 
-		# The events will be listed from the top to the bottom.
-		# All images are stored under 'static/img/about'.
-		# Replace them with your own.
-		[[params.about.events]]
-			img = "1.jpg"
-			date = "2009-2011"
-			title = "Our Humble Beginnings"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
+    # The events will be listed from the top to the bottom.
+    # All images are stored under 'static/img/about'.
+    # Replace them with your own.
+    [[params.about.events]]
+      img = "1.jpg"
+      date = "2009-2011"
+      title = "Our Humble Beginnings"
+      description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
 
-		[[params.about.events]]
-			img = "2.jpg"
-			date = "March 2011"
-			title = "An Agency is Born"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
+    [[params.about.events]]
+      img = "2.jpg"
+      date = "March 2011"
+      title = "An Agency is Born"
+      description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
 
-		[[params.about.events]]
-			img = "3.jpg"
-			date = "December 2012"
-			title = "Our Humble Beginnings"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
+    [[params.about.events]]
+      img = "3.jpg"
+      date = "December 2012"
+      title = "Our Humble Beginnings"
+      description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
 
-		[[params.about.events]]
-			img = "4.jpg"
-			date = "July 2014"
-			title = "Phase Two Expansion"
-			description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
-
-
-	# Portfolio section
-	[params.portfolio]
-		# All projects defined in their own files. You can find example projects
-		# at 'exampleSite/data/projects'. Copy the 'projects' folder into the 'data' directory
-		# at the root of this Hugo site.
-		# For more informtion take a look at the README.
-		title = "Facts"
-		subtitle = "Lorem ipsum dolor sit amet consectetur."
-
-		[params.portfolio.modal]
-            client = "Client"
-            date = "Date"
-            category = "Category"
-            buttonText = "Close project"
+    [[params.about.events]]
+      img = "4.jpg"
+      date = "July 2014"
+      title = "Phase Two Expansion"
+      description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!"
 
 
-	# Team section
-	[params.team]
-		title = "Our amazing team"
-		subtitle = "Lorem ipsum dolor sit amet consectetur."
-		description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde."
+  # Portfolio section
+  [params.portfolio]
+    # All projects defined in their own files. You can find example projects
+    # at 'exampleSite/data/projects'. Copy the 'projects' folder into the 'data' directory
+    # at the root of this Hugo site.
+    # For more informtion take a look at the README.
+    title = "Facts"
+    subtitle = "How do delegates performe compared to alternatives?"
 
-		# All team member's pictures are stored under 'static/img/team'.
-		# Replace them with your own too.
-		[[params.team.members]]
-			img = "1.jpg"
-			name = "Kay Garland"
-			position = "Lead Designer"
-			social = [
-				["fa-twitter", "#"],
-				["fa-facebook", "#"],
-				["fa-linkedin", "#"]
-			]
+    [params.portfolio.modal]
+            buttonText = "Close"
 
-		[[params.team.members]]
-			img = "2.jpg"
-			name = "Larry Parker"
-			position = "Lead Marketer"
-			social = [
-				["fa-twitter", "#"],
-				["fa-facebook", "#"],
-				["fa-linkedin", "#"]
-			]
 
-		[[params.team.members]]
-			img = "3.jpg"
-			name = "Diana Pertersen"
-			position = "Lead Developer"
-			social = [
-				["fa-twitter", "#"],
-				["fa-facebook", "#"],
-				["fa-linkedin", "#"]
-			]
+  # Team section
+  [params.team]
+    title = "Where to use"
+    subtitle = "pretty much everywhere you develop using C++"
+    description = "Since we do not rely on any advanced C++ features and make no use of exceptions or dynamic memory management, delegates can be used on all kinds of systems. Ranging from small embedded controllers to full blown server nodes."
 
-	# Client section
-	# All the clients' logos are stored under 'static/img/logos'.
-	# Replace them with your clients's logos.
-	# [[params.clients]]
-	# 	logo = "envato.jpg"
-	# 	link = "#"
+    # All team member's pictures are stored under 'static/img/team'.
+    # Replace them with your own too.
+    [[params.team.members]]
+      icon = "fa-car"
+      title = "embedded"
+      position = "small, constraint systems"
+
+    [[params.team.members]]
+      icon = "fa-laptop"
+      title = "desktop"
+      position = "personal computing"
+
+    [[params.team.members]]
+      icon = "fa-cloud"
+      title = "cloud"
+      position = "distributed computing"
+
+  # Client section
+  # All the clients' logos are stored under 'static/img/logos'.
+  # Replace them with your clients's logos.
+  # [[params.clients]]
+  #   logo = "envato.jpg"
+  #   link = "#"
   #
-	# [[params.clients]]
-	# 	logo = "designmodo.jpg"
-	# 	link = "#"
+  # [[params.clients]]
+  #   logo = "designmodo.jpg"
+  #   link = "#"
   #
-	# [[params.clients]]
-	# 	logo = "themeforest.jpg"
-	# 	link = "#"
+  # [[params.clients]]
+  #   logo = "themeforest.jpg"
+  #   link = "#"
   #
-	# [[params.clients]]
-	# 	logo = "creative-market.jpg"
-	# 	link = "#"
+  # [[params.clients]]
+  #   logo = "creative-market.jpg"
+  #   link = "#"
 
 
-	# Contact section
-	# [params.contact]
-	# 	title = "Contact us"
-	# 	subtitle  = "Lorem ipsum dolor sit amet consectetur."
-	# 	buttonText = "Send message"
+  # Contact section
+  # [params.contact]
+  #   title = "Contact us"
+  #   subtitle  = "Lorem ipsum dolor sit amet consectetur."
+  #   buttonText = "Send message"
   #
-	# 	# 'warning' defines error messages for invalid inputs
-	# 	[params.contact.form.name]
-	# 		text = "Your Name *"
-	# 		warning = "Please enter your name."
+  #   # 'warning' defines error messages for invalid inputs
+  #   [params.contact.form.name]
+  #     text = "Your Name *"
+  #     warning = "Please enter your name."
   #
-	# 	[params.contact.form.email]
-	# 		text = "Your Email *"
-	# 		warning = "Please enter your email address."
+  #   [params.contact.form.email]
+  #     text = "Your Email *"
+  #     warning = "Please enter your email address."
   #
-	# 	[params.contact.form.phone]
-	# 		text = "Your Phone *"
-	# 		warning = "Please enter your phone number."
+  #   [params.contact.form.phone]
+  #     text = "Your Phone *"
+  #     warning = "Please enter your phone number."
   #
-	# 	[params.contact.form.message]
-	# 		text = "Your Message *"
-	# 		warning = "Please enter a message."
+  #   [params.contact.form.message]
+  #     text = "Your Message *"
+  #     warning = "Please enter a message."
 
 
-	# Footer section
-	[params.footer]
-		copyright = "Published under the MIT License."
+  # Footer section
+  [params.footer]
+    copyright = "Published under the MIT License."
 
-		[[params.footer.social]]
-			icon = "fa-twitter"
-			link = "https://twitter.com/marcontwit"
+    [[params.footer.social]]
+      icon = "fa-twitter"
+      link = "https://twitter.com/marcontwit"
 
-		[[params.footer.social]]
-			icon = "fa-github-alt"
-			link = "https://github.com/marcmo"
+    [[params.footer.social]]
+      icon = "fa-github-alt"
+      link = "https://github.com/marcmo"
 
-		[[params.footer.social]]
-			icon = "fa-envelope"
-			link = "mailto:oliver.mueller@gmail.com"
+    [[params.footer.social]]
+      icon = "fa-envelope"
+      link = "mailto:oliver.mueller@gmail.com"
 

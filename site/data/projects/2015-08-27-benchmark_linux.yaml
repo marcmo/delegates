@@ -1,15 +1,10 @@
 modalID: 1
+modalChart: fa-bar-chart
 title: Linux Benchmark
 subtitle: Running on Ubuntu Linux.
-date: 2014-07-05
+date: 2015-08-27
 img: linuxBenchmark.png
 preview: linuxBenchmarkSmall.png
 client: Start Bootstrap
-clientLink: "#"
 category: Performance
-description: >
-  Running some code on linux. there is more on OSX.
-  this is `code`
-
-    for (int i = 0; i < 10; ++i) {
-    }
+description: Running some code on linux. there is more on OSX.
