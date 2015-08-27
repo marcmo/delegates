@@ -28,22 +28,21 @@ class delegate<R (T::*)(Params...)>
 public:
     typedef R (T::*func_type)(Params...);
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()(Params... args) const
     {
         return (callee_.*func_)(args...);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -62,22 +61,21 @@ class delegate<R (T::*)(Params...) const>
 public:
     typedef R (T::*func_type)(Params...) const;
 
-    delegate(func_type func, const T &callee)
+    delegate(func_type func, const T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()(Params... args) const
     {
         return (callee_.*func_)(args...);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !(*this == other);
     }
@@ -102,19 +100,18 @@ public:
 
     delegate(func_type func)
         : func_(func)
-    {
-    }
+    {}
 
     R operator()(Params... args) const
     {
         return (*func_)(args...);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return func_ == other.func_;
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -127,7 +124,7 @@ private:
  * function to deduce template parameters from call-context
  */
 template <typename F, typename T>
-delegate<F> make_delegate(F func, T &obj)
+delegate<F> make_delegate(F func, T& obj)
 {
     return delegate<F>(func, obj);
 }
@@ -155,19 +152,18 @@ public:
 
     delegate(func_type func)
         : func_(func)
-    {
-    }
+    {}
 
     R operator()() const
     {
         return (*func_)();
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !(*this == other);
     }
@@ -183,19 +179,18 @@ public:
 
     delegate(func_type func)
         : func_(func)
-    {
-    }
+    {}
 
     R operator()(P x) const
     {
         return (*func_)(x);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -215,22 +210,21 @@ class delegate<R (T::*)()>
 public:
     typedef R (T::*func_type)();
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()() const
     {
         return (callee_.*func_)();
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -245,22 +239,21 @@ class delegate<R (T::*)() const>
 public:
     typedef R (T::*func_type)() const;
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()() const
     {
         return (callee_.*func_)();
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -282,22 +275,21 @@ class delegate<R (T::*)(P)>
 public:
     typedef R (T::*func_type)(P);
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()(P arg) const
     {
         return (callee_.*func_)(arg);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -312,22 +304,21 @@ class delegate<R (T::*)(P) const>
 public:
     typedef R (T::*func_type)(P) const;
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()(P arg) const
     {
         return (callee_.*func_)(arg);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -342,22 +333,21 @@ class delegate<R (T::*)(P1, P2)>
 public:
     typedef R (T::*func_type)(P1, P2);
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()(P1 arg, P2 arg2) const
     {
         return (callee_.*func_)(arg, arg2);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -372,22 +362,21 @@ class delegate<R (T::*)(P1, P2, P3)>
 public:
     typedef R (T::*func_type)(P1, P2, P3);
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()(P1 arg, P2 arg2, P3 arg3) const
     {
         return (callee_.*func_)(arg, arg2, arg3);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -402,22 +391,21 @@ class delegate<R (T::*)(P1, P2, P3, P4)>
 public:
     typedef R (T::*func_type)(P1, P2, P3, P4);
 
-    delegate(func_type func, T &callee)
+    delegate(func_type func, T& callee)
         : callee_(callee)
         , func_(func)
-    {
-    }
+    {}
 
     R operator()(P1 arg, P2 arg2, P3 arg3, P4 arg4) const
     {
         return (callee_.*func_)(arg, arg2, arg3, arg4);
     }
 
-    bool operator==(const delegate &other) const
+    bool operator==(const delegate& other) const
     {
         return (&callee_ == &other.callee_) && (func_ == other.func_);
     }
-    bool operator!= (const delegate &other) const
+    bool operator!= (const delegate& other) const
     {
         return !((*this) == other);
     }
@@ -430,7 +418,7 @@ private:
  * function to deduce template parameters from call-context
  */
 template <typename F, typename T>
-delegate<F> make_delegate(F func, T &obj)
+delegate<F> make_delegate(F func, T& obj)
 {
     return delegate<F>(func, obj);
 }

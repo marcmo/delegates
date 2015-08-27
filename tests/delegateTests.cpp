@@ -42,7 +42,7 @@ public:
     {
         return a == 'a' ? x + y : x * y;
     }
-    float crazy(int I, char wanna, float go, const char *crazy)
+    float crazy(int I, char wanna, float go, const char* crazy)
     {
         printf("called crazy with I=%d, wanna=%c, go=%f, crazy=%s\n", I, wanna,
                go, crazy);
@@ -66,7 +66,7 @@ typedef delegate<void (*)()> ServiceDelegate;
 class Service
 {
 public:
-    void registerDelegate(ServiceDelegate &d)
+    void registerDelegate(ServiceDelegate& d)
     {
         mD = &d;
     }
@@ -76,13 +76,13 @@ public:
     }
 
 private:
-    ServiceDelegate *mD;
+    ServiceDelegate* mD;
 };
 typedef delegate<void (*)(int)> ServiceDelegate2;
 class Service2
 {
 public:
-    void registerDelegate(ServiceDelegate2 &d)
+    void registerDelegate(ServiceDelegate2& d)
     {
         mD = &d;
     }
@@ -92,7 +92,7 @@ public:
     }
 
 private:
-    ServiceDelegate2 *mD;
+    ServiceDelegate2* mD;
 };
 
 TEST_CASE("DelegateTest: member function calls", "[calls]")
@@ -169,10 +169,10 @@ TEST_CASE("DelegateTest: member function calls", "[calls]")
     {
         auto d = make_delegate(&A::crazy, a);
         static_assert(
-            std::is_same<delegate<float (A::*)(int, char, float, const char *)>,
-                         decltype(d)>::value,
+            std::is_same<delegate<float (A::*)(int, char, float, const char*)>,
+            decltype(d)>::value,
             "!");
-        const char *ss = "sheet";
+        const char* ss = "sheet";
         REQUIRE(9.5 == d(5, 'a', 4.5, ss));
     }
 }
