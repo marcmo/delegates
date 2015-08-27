@@ -14,6 +14,9 @@ test: $(CLOSURETEST) $(DELEGATETEST)
 	./$(CLOSURETEST)
 	./$(DELEGATETEST)
 
+testOld: CFLAGS += -D=DELEGATES_TEST_PRE_CPP11
+testOld: clean test
+
 bench: $(BENCHMARK)
 	./$(BENCHMARK)
 

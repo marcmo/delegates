@@ -12,6 +12,8 @@ public:
     {
         simpleFunctionWasCalled = true;
     }
+    void simpleOther()
+    {}
     void simple_const() const
     {
         simpleFunctionWasCalled = true;
@@ -201,3 +203,58 @@ TEST_CASE("DelegateTest: free function calls", "[calls]")
         REQUIRE(345 == myFreeFunction2parameter);
     }
 }
+TEST_CASE("DelegateTest: compare a copied delegate", "[assignement]")
+{
+    A a;
+    SECTION("compare: void function with 0 parameter")
+    {
+        auto d = make_delegate(&A::simple, a);
+        auto dother = make_delegate(&A::simpleOther, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+        REQUIRE(d != dother);
+    }
+    SECTION("compare: with 1 parameter, returning int")
+    {
+        auto d = make_delegate(&A::square, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+    }
+    SECTION("compare: with 1 parameter (pointer), returning int")
+    {
+        auto d = make_delegate(&A::squareStar, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+    }
+    SECTION("compare: const void function with 0 parameter")
+    {
+        auto d = make_delegate(&A::simple_const, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+    }
+    SECTION("compare: const function with 1 parameter, returning int")
+    {
+        auto d = make_delegate(&A::square_const, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+    }
+    SECTION("call with 2 parameter, returning int")
+    {
+        auto d = make_delegate(&A::add, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+    }
+    SECTION("call with multiple parameters")
+    {
+        auto d = make_delegate(&A::addOrMultiply, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+    }
+    SECTION("call with crazy parameters")
+    {
+        auto d = make_delegate(&A::crazy, a);
+        auto d2 = d;
+        REQUIRE(d == d2);
+    }
+}
+

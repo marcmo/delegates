@@ -1,10 +1,12 @@
 #ifndef DLGT_DELEGATE_H_
 #define DLGT_DELEGATE_H_
 
-
+#if (__cplusplus > 199711L)
+#  define DELEGATES_CPP11_SUPPORT
+#endif
 namespace dlgt
 {
-#if __cplusplus > 199711L
+#if defined (DELEGATES_CPP11_SUPPORT) && !defined(DELEGATES_TEST_PRE_CPP11)
 // we have C++11 support...yeah!
 /**
  * non specialized template declaration for delegate
@@ -12,24 +14,6 @@ namespace dlgt
 template <typename T>
 class delegate;
 
-template <typename T, typename R, typename D, typename... Params>
-class delegate_base
-{
-protected:
-    typedef R (T::*func_type)(Params...);
-    T& callee_;
-    func_type callbackFunction_;
-    delegate_base(func_type mfp, T& callee)
-        :   callee_(callee),
-            callbackFunction_(mfp)
-    {}
-public:
-    bool operator==(const D& other) const
-    {
-        return (callee_ == other.callee_)
-                && (callbackFunction_ == other.callbackFunction_);
-    }
-};
 /**
  * specialization for member functions
  *
@@ -40,20 +24,33 @@ public:
  */
 template <typename T, typename R, typename... Params>
 class delegate<R (T::*)(Params...)>
-    : public delegate_base<T, R, delegate<R (T::*)(Params...)>, Params...>
 {
 public:
-    typedef delegate_base<T, R, delegate<R (T::*)(Params...)>, Params...> tBase;
+    typedef R (T::*func_type)(Params...);
 
-    delegate(typename tBase::func_type func, T &callee)
-        : tBase(func, callee)
+    delegate(func_type func, T &callee)
+        : callee_(callee)
+        , func_(func)
     {
     }
 
     R operator()(Params... args) const
     {
-        return (tBase::callee_.*tBase::callbackFunction_)(args...);
+        return (callee_.*func_)(args...);
     }
+
+    bool operator==(const delegate &other) const
+    {
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
+    }
+
+private:
+    T& callee_;
+    func_type func_;
 };
 
 /**
@@ -66,23 +63,27 @@ public:
     typedef R (T::*func_type)(Params...) const;
 
     delegate(func_type func, const T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()(Params... args) const
     {
-        return (callee_->*func_)(args...);
+        return (callee_.*func_)(args...);
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !(*this == other);
     }
 
 private:
-    const T *callee_;
+    const T& callee_;
     func_type func_;
 };
 
@@ -112,6 +113,10 @@ public:
     bool operator==(const delegate &other) const
     {
         return func_ == other.func_;
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
@@ -162,6 +167,10 @@ public:
     {
         return (func_ == other.func_);
     }
+    bool operator!= (const delegate &other) const
+    {
+        return !(*this == other);
+    }
 
 private:
     func_type func_;
@@ -186,6 +195,10 @@ public:
     {
         return (func_ == other.func_);
     }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
+    }
 
 private:
     func_type func_;
@@ -203,23 +216,27 @@ public:
     typedef R (T::*func_type)();
 
     delegate(func_type func, T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()() const
     {
-        return (callee_->*func_)();
+        return (callee_.*func_)();
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
-    T *callee_;
+    T& callee_;
     func_type func_;
 };
 template <typename T, typename R>
@@ -229,23 +246,27 @@ public:
     typedef R (T::*func_type)() const;
 
     delegate(func_type func, T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()() const
     {
-        return (callee_->*func_)();
+        return (callee_.*func_)();
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
-    T *callee_;
+    T& callee_;
     func_type func_;
 };
 /**
@@ -262,23 +283,27 @@ public:
     typedef R (T::*func_type)(P);
 
     delegate(func_type func, T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()(P arg) const
     {
-        return (callee_->*func_)(arg);
+        return (callee_.*func_)(arg);
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
-    T *callee_;
+    T& callee_;
     func_type func_;
 };
 template <typename T, typename R, typename P>
@@ -288,23 +313,27 @@ public:
     typedef R (T::*func_type)(P) const;
 
     delegate(func_type func, T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()(P arg) const
     {
-        return (callee_->*func_)(arg);
+        return (callee_.*func_)(arg);
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
-    T *callee_;
+    T& callee_;
     func_type func_;
 };
 template <typename T, typename R, typename P1, typename P2>
@@ -314,23 +343,27 @@ public:
     typedef R (T::*func_type)(P1, P2);
 
     delegate(func_type func, T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()(P1 arg, P2 arg2) const
     {
-        return (callee_->*func_)(arg, arg2);
+        return (callee_.*func_)(arg, arg2);
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
-    T *callee_;
+    T& callee_;
     func_type func_;
 };
 template <typename T, typename R, typename P1, typename P2, typename P3>
@@ -340,23 +373,27 @@ public:
     typedef R (T::*func_type)(P1, P2, P3);
 
     delegate(func_type func, T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()(P1 arg, P2 arg2, P3 arg3) const
     {
-        return (callee_->*func_)(arg, arg2, arg3);
+        return (callee_.*func_)(arg, arg2, arg3);
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
-    T *callee_;
+    T& callee_;
     func_type func_;
 };
 template <typename T, typename R, typename P1, typename P2, typename P3, typename P4>
@@ -366,23 +403,27 @@ public:
     typedef R (T::*func_type)(P1, P2, P3, P4);
 
     delegate(func_type func, T &callee)
-        : callee_(&callee)
+        : callee_(callee)
         , func_(func)
     {
     }
 
     R operator()(P1 arg, P2 arg2, P3 arg3, P4 arg4) const
     {
-        return (callee_->*func_)(arg, arg2, arg3, arg4);
+        return (callee_.*func_)(arg, arg2, arg3, arg4);
     }
 
     bool operator==(const delegate &other) const
     {
-        return (callee_ == other.callee_) && (func_ == other.func_);
+        return (&callee_ == &other.callee_) && (func_ == other.func_);
+    }
+    bool operator!= (const delegate &other) const
+    {
+        return !((*this) == other);
     }
 
 private:
-    T *callee_;
+    T& callee_;
     func_type func_;
 };
 /**
@@ -400,7 +441,7 @@ delegate<T> make_delegate(T func)
     return delegate<T>(func);
 }
 
-#endif // #if __cplusplus > 199711L
+#endif // DELEGATES_CPP11_SUPPORT
 
 } // namespace delegate
 
