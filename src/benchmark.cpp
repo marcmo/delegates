@@ -55,10 +55,13 @@ void benchmarkLoop(F1 increaser, F2 decreaser)
     {
         benchmark b(make_delegate(&reporter::report, r));
 
-        for (int i = 0; i < REPETITIONS; i++) {
+        for (int i = 0; i < REPETITIONS; i++)
+        {
             increaser();
             if (i % 42 == 0)
+            {
                 decreaser();
+            }
         }
     }
     printf("counter=%d\n", counter);
@@ -69,39 +72,73 @@ using namespace bench;
 
 int main()
 {
-    printf("********** delegates: **********\n");
-    Worker w(100);
-    auto increaser = make_delegate(&Worker::inc, w);
-    auto decreaser = make_delegate(&Worker::dec, w);
-    benchmarkLoop(increaser, decreaser);
-
-    printf("********** std::function: **********\n");
-    reporter r;
-    Worker w2(100);
-    std::function<int(Worker &)> increaser2 = &Worker::inc;
-    std::function<int(Worker &)> decreaser2 = &Worker::dec;
+    printf("BENCHMARK executing %lld function calls\n", REPETITIONS*2);
     {
-        benchmark b(make_delegate(&reporter::report, r));
-
-        for (int i = 0; i < REPETITIONS; i++) {
-            increaser2(w2);
-            if (i % 42 == 0)
-                decreaser2(w2);
-        }
+        printf("********** delegates: **********\n");
+        Worker w(100);
+        auto increaser = make_delegate(&Worker::inc, w);
+        auto decreaser = make_delegate(&Worker::dec, w);
+        benchmarkLoop(increaser, decreaser);
     }
-    printf("counter=%d\n", counter);
 
-    printf("********** std::bind: **********\n");
-    Worker w3(100);
-    auto increaser3 = bind(&Worker::inc, &w3);
-    auto decreaser3 = bind(&Worker::dec, &w3);
-    benchmarkLoop(increaser3, decreaser3);
+    {
+        printf("********** std::function: **********\n");
+        reporter r;
+        Worker w2(100);
+        std::function<int(Worker&)> increaser2 = &Worker::inc;
+        std::function<int(Worker&)> decreaser2 = &Worker::dec;
+        {
+            benchmark b(make_delegate(&reporter::report, r));
 
-    printf("********** lambda: **********\n");
-    Worker w4(100);
-    auto incLambda = [&w4]() { return w4.inc(); };
-    auto decLambda = [&w4]() { return w4.dec(); };
-    benchmarkLoop(incLambda, decLambda);
+            for (int i = 0; i < REPETITIONS; i++)
+            {
+                increaser2(w2);
+                if (i % 42 == 0)
+                {
+                    decreaser2(w2);
+                }
+            }
+        }
+        printf("counter=%d\n", counter);
+    }
 
+    {
+        printf("********** std::bind: **********\n");
+        Worker w3(100);
+        auto increaser3 = bind(&Worker::inc, &w3);
+        auto decreaser3 = bind(&Worker::dec, &w3);
+        benchmarkLoop(increaser3, decreaser3);
+
+        printf("********** lambda: **********\n");
+        Worker w4(100);
+        auto incLambda = [&w4]()
+        {
+            return w4.inc();
+        };
+        auto decLambda = [&w4]()
+        {
+            return w4.dec();
+        };
+        benchmarkLoop(incLambda, decLambda);
+    }
+
+    {
+        printf("********** direct call: **********\n");
+        reporter r;
+        Worker w5(100);
+        {
+            benchmark b(make_delegate(&reporter::report, r));
+
+            for (int i = 0; i < REPETITIONS; i++)
+            {
+                w5.inc();
+                if (i % 42 == 0)
+                {
+                    w5.dec();
+                }
+            }
+        }
+        printf("counter=%d\n", counter);
+    }
     return 0;
 }
