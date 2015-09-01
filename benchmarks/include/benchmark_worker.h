@@ -9,7 +9,10 @@ public:
     Worker(int s);
     int inc();
     int dec();
+    virtual int incVirtual() { return 0; };
+    virtual int decVirtual() { return 0; };
 };
+
 } // namespace bench
 
 #endif /* end of include guard */

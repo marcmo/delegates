@@ -16,4 +16,5 @@ int Worker::dec()
 {
     return --counter;
 }
+
 } // namespace bench

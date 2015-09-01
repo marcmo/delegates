@@ -3,9 +3,12 @@
 
 #include <delegate.h>
 #include "benchmark_worker.h"
+#include "benchmark_virtualworker.h"
 
 using namespace dlgt;
 using namespace bench;
+
+extern int vcounter;
 
 NONIUS_BENCHMARK("*****delegates*****", [](nonius::chronometer meter) {
     Worker w(100);
@@ -38,5 +41,11 @@ NONIUS_BENCHMARK("*****lambda*****", [](nonius::chronometer meter) {
 NONIUS_BENCHMARK("*****direct call*****", [](nonius::chronometer meter) {
     Worker w(100);
     meter.measure([&]() { w.inc(); w.dec(); });
+})
+
+NONIUS_BENCHMARK("*****virtual call*****", [](nonius::chronometer meter) {
+    VirtualWorker vw(100);
+    Worker* w = &vw;
+    meter.measure([&]() { w->incVirtual(); w->decVirtual(); });
 })
 

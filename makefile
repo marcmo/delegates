@@ -38,7 +38,7 @@ $(BUILD_DIR)/%.o: tests/%.cpp ${includes}
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 bench_includes = $(wildcard benchmarks/include/*.h)
-$(BENCHMARK): $(BUILD_DIR)/bench.o $(BUILD_DIR)/benchmark_worker.o
+$(BENCHMARK): $(BUILD_DIR)/bench.o $(BUILD_DIR)/benchmark_worker.o $(BUILD_DIR)/benchmark_virtualworker.o
 	$(CC) $? -o $@
 $(BUILD_DIR)/%.o: benchmarks/src/%.cpp ${bench_includes} $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(INC) -Ibenchmarks/include -Ibenchmarks/include/nonius -c -o $@ $<
