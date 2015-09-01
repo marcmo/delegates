@@ -4,11 +4,46 @@
         <div class="intro-text">
             <div class="intro-lead-in">{{ with .Site.Params.hero.title }}{{ . }}{{ end }}</div>
             <div class="intro-heading">{{ with .Site.Params.hero.subtitle }}{{ . }}{{ end }}</div>
-            <a href="#features" class="page-scroll btn btn-xl">{{ with .Site.Params.hero.buttonText }}{{ . }}{{ end }}</a>
-            <section class="row">
-              <div class="code col-md-4">
+            <div class="row">
+              <div class="code col-md-6 col-md-offset-3 text-left">
+<div class="quickstart text-left">
+  <div class="grid">
+    <div class="unit golden-large code">
+      <p class="title">Quickstart</p>
+      <div class="shell">
+        <p class="line">
+          <span class="prompt">$</span>
+          <span class="command">wget http://bit.ly/simple_delegates &#45;O delegate.h</span>
+        </p>
+        <p class="line">
+          <span class="prompt">$</span>
+          <span class="command">cat &lt;&lt;EOT &gt;&gt; test.cpp</span>
+        </p>
+        <p class="line"><span class="output">#include "delegate.h"</span></p>
+        <p class="line"><span class="output">#include "stdio.h"</span></p>
+        <p class="line"> <span class="output">struct listener {</span> </p>
+        <p class="line"> <span class="output">&nbsp;&nbsp;&nbsp;&nbsp;void foo(int x) { printf("got %d\n", x);} };</span> </p>
+        <p class="line"><span class="output">int main() {</span></p>
+        <p class="line"><span class="output">&nbsp;&nbsp;&nbsp;&nbsp;listener l;</span></p>
+        <p class="line"><span class="output">&nbsp;&nbsp;&nbsp;&nbsp;auto d = dlgt::make_delegate(&amp;listener::foo, l);</span></p>
+        <p class="line"><span class="output">&nbsp;&nbsp;&nbsp;&nbsp;d(42); return 0; }</span></p>
+        <p class="line">
+          <span class="command">EOT</span>
+        </p>
+        <p class="line">
+          <span class="prompt">$</span>
+          <span class="command">g++ test.cpp --std=c++11 -o test &amp;&amp; ./test</span>
+        </p>
+        <p class="line">
+          <span class="path">got 42</span>
+        </p>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
               </div>
-            </section>
+            </div>
         </div>
     </div>
 </header>

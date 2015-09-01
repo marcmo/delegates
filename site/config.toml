@@ -75,12 +75,12 @@ theme = "hugo-agency-theme"
     [[params.services.list]]
       icon = "fa-globe"
       title = "Portable"
-      description = "only requires a C++11 compatible compiler - no architecture or hardware dependent code"
+      description = "only requires a C++98 compatible compiler - no architecture or hardware dependent code"
 
     [[params.services.list]]
       icon = "fa-star"
       title = "no dynamic memory allocation"
-      description = "stay in controll of your resources -- implementation does not use malloc/new"
+      description = "stay in control of your resources -- implementation does not use malloc/new"
 
     [[params.services.list]]
       icon = "fa-code"
@@ -129,7 +129,7 @@ theme = "hugo-agency-theme"
     # at the root of this Hugo site.
     # For more informtion take a look at the README.
     title = "Facts"
-    subtitle = "How do delegates performe compared to alternatives?"
+    subtitle = "How do delegates perform compared to alternatives?"
 
     [params.portfolio.modal]
             buttonText = "Close"

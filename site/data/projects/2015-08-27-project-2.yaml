@@ -1,10 +1,11 @@
 modalID: 2
 modalChart: fa-cogs
-title: Mac Benchmark
-subtitle: Running on Mac OS Yosemite.
+title: Member vs. Static
+subtitle: member functions behave different than static functions
 date: 2015-08-27
-img: linuxBenchmark.png
-preview: linuxBenchmarkSmall.png
+img: gbenchmark.png
+preview: gbenchmarkSmall.png
 client: Start Bootstrap
+clientLink: "#"
 category: Performance
-description: "[Startup Framework](//designmodo.com/startup/?u=787) is a website builder for professionals. Startup Framework contains components and complex blocks (PSD+HTML Bootstrap themes and templates) which can easily be integrated into almost any design. All of these components are made in the same style, and can easily be integrated into projects, allowing you to create hundreds of solutions for your future projects. <br><br>You can preview Startup Framework [here](//designmodo.com/startup/?u=787)."
+description: these benchmarks where performed using google's [microbenchmark library for C++](https://github.com/google/benchmark). Again std::function has the worst performance for member functions. For static functions there is no noteworthy difference between all implementations.

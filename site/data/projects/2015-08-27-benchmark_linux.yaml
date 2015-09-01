@@ -3,8 +3,8 @@ modalChart: fa-bar-chart
 title: Linux Benchmark
 subtitle: Running on Ubuntu Linux.
 date: 2015-08-27
-img: linuxBenchmark.png
-preview: linuxBenchmarkSmall.png
+img: benchmarkLinux.png
+preview: benchmarkLinuxSmall.png
 client: Start Bootstrap
 category: Performance
-description: Running some code on linux. there is more on OSX.
+description: Some basic benchmarks that where generated using the very useful [nonius benchmark library](https://github.com/rmartinho/nonius). All implementations almost perform identically with the exception of std::function which is by far the worst!
