@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; delegates</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on C&#43;&#43; delegates</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Aug 2015 20:27:28 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>about</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 17 Aug 2015 20:27:28 +0200</pubDate>
+      
+      <guid>http://localhost:1313/about/</guid>
+      <description>
+
+&lt;h1 id=&#34;delegates:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;delegates&lt;/h1&gt;
+
+&lt;p&gt;Passing around functions in functional languages like haskell or clojure is how you program in those
+languages. Passing around functions in C/C++ is possible but more tedious. The syntax for function
+pointers is quite daunting and relatively limited in it&amp;rsquo;s application. For example it is not
+possible to pass a member-function around.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;delegates&lt;/em&gt; take care of some of the problems and allow to easily pass around and store &amp;ldquo;functions&amp;rdquo;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
