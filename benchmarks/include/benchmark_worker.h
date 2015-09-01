@@ -11,6 +11,8 @@ public:
     int dec();
     virtual int incVirtual() { return 0; };
     virtual int decVirtual() { return 0; };
+    static int incStatic();
+    static int decStatic();
 };
 
 } // namespace bench

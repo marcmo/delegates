@@ -16,5 +16,13 @@ int Worker::dec()
 {
     return --counter;
 }
+int Worker::incStatic()
+{
+    return ++counter;
+}
+int Worker::decStatic()
+{
+    return --counter;
+}
 
 } // namespace bench
