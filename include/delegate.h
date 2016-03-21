@@ -140,7 +140,7 @@ delegate<T> make_delegate(T func)
 #define DELEGATE_CONST make_delegate
 #define DELEGATE_FREE make_delegate
 
-#else // hmmm...no C++11 support...yak
+#else // hmmm...no C++11 support...yuk!
 template <typename T>
 class delegate;
 

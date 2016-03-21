@@ -1,3 +1,4 @@
 BuildDir
 site/public/
 .tup/
+*.pyc
