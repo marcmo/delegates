@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C&#43;&#43; delegates</title>
-    <link>http://localhost:1111/</link>
+    <link>http://marcmo.github.io/delegate/</link>
     <description>Recent content on C&#43;&#43; delegates</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 17 Aug 2015 20:27:28 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1111/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://marcmo.github.io/delegate/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>about</title>
-      <link>http://localhost:1111/about/</link>
+      <link>http://marcmo.github.io/delegate/about/</link>
       <pubDate>Mon, 17 Aug 2015 20:27:28 +0200</pubDate>
       
-      <guid>http://localhost:1111/about/</guid>
+      <guid>http://marcmo.github.io/delegate/about/</guid>
       <description>
 
 &lt;h1 id=&#34;delegates:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;delegates&lt;/h1&gt;
