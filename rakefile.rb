@@ -21,10 +21,10 @@ end
 task :default => [DELEGATETEST,CLOSURETEST]
 
 file DELEGATETEST => "#{BUILD_DIR}/DelegateTests.o" do
-	sh "#{CC} -o #{DELEGATETEST} #{BUILD_DIR}/DelegateTests.o"
+  sh "#{CC} -o #{DELEGATETEST} #{BUILD_DIR}/DelegateTests.o"
 end
 file CLOSURETEST => "#{BUILD_DIR}/ClosureTests.o" do
-	sh "#{CC} -o #{CLOSURETEST} #{BUILD_DIR}/ClosureTests.o"
+  sh "#{CC} -o #{CLOSURETEST} #{BUILD_DIR}/ClosureTests.o"
 end
 
 rule ".o" => [->(f){locate_source(f)}, BUILD_DIR] do |t|
@@ -35,4 +35,20 @@ def locate_source(o_file)
   SOURCE_FILES.detect { |f|
     f.ext('') == o_file.pathmap("%{^#{BUILD_DIR},#{SRC_DIR}}X")
   }
+end
+
+desc "build gh-pages"
+task :site do
+  cd "site" do
+    sh "hugo -d ../gh-pages"
+  end
+end
+
+desc "build & deploy gh-pages to github"
+task :deploy => :site do
+  cd "gh-pages" do
+    sh "git add ."
+    sh "git commit -m 'updated docs'"
+  end
+  sh "git push origin gh-pages:gh-pages"
 end

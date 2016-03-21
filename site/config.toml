@@ -1,8 +1,10 @@
 # Site settings
-baseurl = "http://replace-this-with-your-hugo-site.com/"
+baseurl = "http://marcmo.github.io/delegates"
 languageCode = "en-us"
 title = "C++ delegates"
+canonifyurls = true
 theme = "hugo-agency-theme"
+pygmentsstyle = "monokai"
 
 
 [params]

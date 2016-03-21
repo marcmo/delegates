@@ -2,3 +2,4 @@ BuildDir
 site/public/
 .tup/
 *.pyc
+gh-pages
