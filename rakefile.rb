@@ -1,6 +1,6 @@
 require 'rake/clean'
 
-BUILD_DIR="BuildDir"
+BUILD_DIR="build"
 SRC_DIR="tests"
 SOURCE_FILES = FileList.new("#{SRC_DIR}/**/*.cpp")
 CLEAN.include(BUILD_DIR)
@@ -20,11 +20,11 @@ end
 
 task :default => [DELEGATETEST,CLOSURETEST]
 
-file DELEGATETEST => "#{BUILD_DIR}/DelegateTests.o" do
-  sh "#{CC} -o #{DELEGATETEST} #{BUILD_DIR}/DelegateTests.o"
+file DELEGATETEST => "#{BUILD_DIR}/delegateTests.o" do
+  sh "#{CC} -o #{DELEGATETEST} #{BUILD_DIR}/delegateTests.o"
 end
-file CLOSURETEST => "#{BUILD_DIR}/ClosureTests.o" do
-  sh "#{CC} -o #{CLOSURETEST} #{BUILD_DIR}/ClosureTests.o"
+file CLOSURETEST => "#{BUILD_DIR}/closureTests.o" do
+  sh "#{CC} -o #{CLOSURETEST} #{BUILD_DIR}/closureTests.o"
 end
 
 rule ".o" => [->(f){locate_source(f)}, BUILD_DIR] do |t|
@@ -33,7 +33,8 @@ end
 
 def locate_source(o_file)
   SOURCE_FILES.detect { |f|
-    f.ext('') == o_file.pathmap("%{^#{BUILD_DIR},#{SRC_DIR}}X")
+    detected = (f.ext('') == o_file.pathmap("%{^#{BUILD_DIR},#{SRC_DIR}}X"))
+    detected
   }
 end
 

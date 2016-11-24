@@ -3,3 +3,4 @@ site/public/
 .tup/
 *.pyc
 gh-pages
+build/
